@@ -27,7 +27,7 @@ jobs:
         uses: abatilo/actions-poetry@v3
       - name: Install dependencies
         run: |
-          poetry install --no-interaction
+          poetry install --no-interaction --with dev
       - name: Lint with ruff
         run: |
           ruff check --output-format=github .
