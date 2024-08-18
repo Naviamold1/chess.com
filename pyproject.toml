@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nav-chess-com"
-version = "2.1.0"
+version = "2.2.0"
 description = "Python Wrapper for Chess.com API"
 authors = ["Artur Saradzhyan <sarartur.ruk@gmail.com>"]
 license = "MIT"
