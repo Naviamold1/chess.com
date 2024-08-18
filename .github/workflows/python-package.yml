@@ -28,6 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install --no-interaction --with dev
+          poetry shell
       - name: Lint with ruff
         run: |
           ruff check --output-format=github .
