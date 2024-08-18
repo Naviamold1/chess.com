@@ -23,14 +23,23 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Install poetry
+        uses: abatilo/actions-poetry@v3
+      - name: Setup a local virtual environment
+        run: |
+            poetry config virtualenvs.create true --local
+            poetry config virtualenvs.in-project true --local
+      - uses: actions/cache@v3
+        name: Define a cache for the virtual environment based on the dependencies lock file
+        with:
+            path: ./.venv
+            key: venv-${{ hashFiles('poetry.lock') }}
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install ruff pytest
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          poetry install --no-interaction --with dev
       - name: Lint with ruff
         run: |
-          ruff check --output-format=github .
+          poetry run ruff check --output-format=github .
       - name: Test with pytest
         run: |
-          pytest
+          poetry run pytest
